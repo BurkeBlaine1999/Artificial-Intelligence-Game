@@ -1,10 +1,16 @@
 package ie.gmit.sw.ai;
 
 import javafx.application.Application;
+import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /*
@@ -21,27 +27,57 @@ public class GameWindow extends Application{
 	private int currentCol;
 	
 	static int[] playerPos = {0,0};
+	Text controls = new Text(); 
+	Text healthText = new Text(); 
 	
+	public String health = "100";
+	
+	VBox box = new VBox();
+	Scene scene = new Scene(box);
+	
+	private static GameWindow gw;
+	
+	public static GameWindow getInstance() {
+		if (gw == null)
+			gw = new GameWindow();
+		return gw;
+	}
 	
 	@Override
     public void start(Stage stage) throws Exception {
 		model = new GameModel(DEFAULT_SIZE); //Create a model
     	view = new GameView(model); //Create a view of the model
     	
+
     	stage.setTitle("GMIT - B.Sc. in Computing (Software Development) - AI Assignment 2021");
 		stage.setWidth(600);
-		stage.setHeight(630);
+		stage.setHeight(800);
 		stage.setOnCloseRequest((e) -> model.tearDown()); //Shut down the executor service
-    	
-		VBox box = new VBox();
-		Scene scene = new Scene(box);
+	
+		
+		controls.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.ITALIC, 20)); 
+		controls.setText("\nUse the arrow keys to move. \nPress 'z' to zoom out !\n");
+		controls.setX(300); 
+		controls.setY(790);	
+        
+		
+		healthText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20)); 
+		healthText.setText("Player Health : " + health);
+		healthText.setX(300); 
+		healthText.setY(790);
+		
+
 		scene.setOnKeyPressed(e -> keyPressed(e)); //Add a key listener
 		stage.setScene(scene);
+//		Image icon = new Image("Icon.png");
+//		stage.getIcons().add(icon);
 		
     	Sprite[] sprites = getSprites(); //Load the sprites from the res directory
     	view.setSprites(sprites); //Add the sprites to the view
     	placePlayer(); //Add the player
     	box.getChildren().add(view);
+    	box.getChildren().add(controls);
+    	box.getChildren().add(healthText);
 		
     	view.draw(); //Paint the view
     	
@@ -71,7 +107,8 @@ public class GameWindow extends Application{
         	return;
         }
         
-        updateView();       
+        updateView();      
+        updateHealth();
     }
 	
 	private void placePlayer(){  //Place the main player character	
@@ -86,6 +123,12 @@ public class GameWindow extends Application{
 		view.setCurrentCol(currentCol);
 		playerPos[0] = currentRow;
 		playerPos[1] = currentCol;
+		
+	}
+	
+	public void updateHealth(){
+		Player p = Player.getInstance();
+		healthText.setText("Player Health : " + p.getHealth());
 	}
 	
 	private Sprite[] getSprites() throws Exception{

@@ -32,7 +32,7 @@ import javafx.concurrent.Task;
  */
  
 public class CharacterTask extends Task<Void>{
-	private static final int SLEEP_TIME = 300; //Sleep for 300 ms
+	private static final int SLEEP_TIME = 1000; //Sleep for 300 ms
 	private static ThreadLocalRandom rand = ThreadLocalRandom.current();
 	private boolean alive = true;
 	private GameModel model;
@@ -70,7 +70,7 @@ public class CharacterTask extends Task<Void>{
     	
     	
     	while (alive) {
-    		
+    		//System.out.println(alive);
         	if(interaction.ghostAlive() == false){
         		alive = false;
         		System.out.println("INTERACTIONS GHOST ALIVE = " + alive);
@@ -79,7 +79,7 @@ public class CharacterTask extends Task<Void>{
         	Thread.sleep(SLEEP_TIME);      	
         	int [] playerPos = player.getPos();
         	     	
-        	interaction.setGhost(g.getGhost()); 
+        	//interaction.setGhost(g.getGhost()); 
         	interaction.checkDistance(row, col, playerPos[0], playerPos[1]);
         	
         	synchronized (model) {

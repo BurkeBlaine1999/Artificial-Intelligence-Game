@@ -8,6 +8,7 @@ import javafx.animation.Timeline;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 /*
@@ -29,6 +30,8 @@ public class GameView extends Canvas{
 	private GameModel model;
 	private Sprite[] sprites;
 	private int imageIndex = -1;
+	
+	Player p = Player.getInstance();
 	
 	public GameView(GameModel model) throws Exception{
 		super(DEFAULT_VIEW_SIZE, DEFAULT_VIEW_SIZE);
@@ -97,6 +100,7 @@ public class GameView extends Canvas{
         		}
         	}
         }
+
 	}
 
 	public void toggleZoom(){

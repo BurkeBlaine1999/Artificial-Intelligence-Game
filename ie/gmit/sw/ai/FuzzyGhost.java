@@ -14,7 +14,6 @@ public class FuzzyGhost {
 	String Command;
 	
 	GameWindow gw = new GameWindow();
-	private int[] playerPos = gw.getPlayerModel();
 	
 	public FuzzyGhost(int health, int Sharpness) throws Exception{
 		

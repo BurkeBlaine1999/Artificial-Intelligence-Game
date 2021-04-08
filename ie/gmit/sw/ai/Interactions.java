@@ -6,7 +6,8 @@ public class Interactions {
 	///Player player = new Player();
 	Player player = Player.getInstance();
 	
-	Ghost ghost = new Ghost();
+	//Ghost ghost = new Ghost();
+	Ghost ghost = Ghost.getInstance();
 	String sharpness="";
 	
 	public void checkDistance(int row, int col, int playerRow, int playerCol) {
@@ -14,22 +15,26 @@ public class Interactions {
 		distance = Math.sqrt((playerRow - row) * (playerRow -row) + (playerCol - col) * (playerCol - col));
 		distance = Math.round(distance);
 		
-		if(distance <= 1) {
+		System.out.println(distance);
+		System.out.println(playerRow + "    " + playerCol);
+		
+		if(distance <= 3) {
 			if(ghostAlive()) {
 				attack();
 			}
-		}else if(distance >= 5) {
+		}else if(distance >= 15) {
 			PlayerHeal();
 			if(ghostAlive()) {
 				GhostHeal();
 			}
-			
 		}		
 	}
 	
 	public void attack() {		
-			player.takeDamage(2);
-			ghost.takeDamage();				
+			System.out.println("This ghosts damage type is : " + ghost.damageType());
+			this.ghost.takeDamage();	
+			player.takeDamage(ghost.damageType());
+						
 	}
 	public void PlayerHeal() {	
 		
@@ -49,18 +54,18 @@ public class Interactions {
 		
 	}
 	
-	public void setGhost(int[] g) throws Exception {
-		
-		if(g[1] == 2) {
-			sharpness = "Sharp";
-		}else if(g[1] == 1) {
-			sharpness = "Blunt";
-		}else {
-			sharpness = "Broken";
-		}
-		ghost = new Ghost(g[0],sharpness,g[2]);
-		
-	}
+//	public void setGhost(int[] g) throws Exception {
+//		
+//		if(g[1] == 2) {
+//			sharpness = "Sharp";
+//		}else if(g[1] == 1) {
+//			sharpness = "Blunt";
+//		}else {
+//			sharpness = "Broken";
+//		}
+//		ghost = new Ghost(g[0],sharpness,g[2]);
+//		
+//	}
 	
 	public boolean ghostAlive() {
 		return ghost.isAlive();

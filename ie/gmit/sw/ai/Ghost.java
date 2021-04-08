@@ -15,11 +15,21 @@ public class Ghost implements Command {
 	String Command;
 	
 	GameWindow gw = new GameWindow();
-	//private int[] playerPos = gw.getPlayerModel();
 	
 	boolean alive = true;
 	
+	private static Ghost g;
+	
+	int timer;
+	
 	public Ghost() {}
+	
+	public static Ghost getInstance() {
+		if (g == null)
+			g = new Ghost();
+		return g;
+	}
+
 	
 	public Ghost(int health, String Sharpness,int playerInRange) throws Exception{
 		
@@ -35,9 +45,9 @@ public class Ghost implements Command {
 		
 		if(Sharpness == "Sharp") {
 			swordSharpness = 2;
-		}else if(Sharpness == "blunt") {
+		}else if(Sharpness == "Blunt") {
 			swordSharpness = 1;
-		}else{
+		}else if(Sharpness == "Broken"){
 			swordSharpness = 0;
 		}
 		
@@ -63,10 +73,16 @@ public class Ghost implements Command {
 
 
 	public void heal() {
-		if(ghostHealth >= 100) {
+		if(this.ghostHealth >= 100) {
 			ghostHealth = 100;		
 		}else {
-			ghostHealth += 5;
+			if(timer < 3) {
+				timer++;
+			}else {
+				timer = 0;
+				ghostHealth += 1;
+				ghostHealth += 5;
+			}
 		}
 
 	}
@@ -81,7 +97,7 @@ public class Ghost implements Command {
 			alive = false;
 			System.out.println("GHOST DEAD");	
 		}else {
-			ghostHealth -= 10;
+			this.ghostHealth -= 20;
 			System.out.println("(DAMAGED) GHOST Health : " + ghostHealth);
 		}
 
