@@ -31,7 +31,7 @@ public class GameView extends Canvas{
 	private Sprite[] sprites;
 	private int imageIndex = -1;
 	
-	Player p = Player.getInstance();
+	//Player p = Player.getInstance();
 	
 	public GameView(GameModel model) throws Exception{
 		super(DEFAULT_VIEW_SIZE, DEFAULT_VIEW_SIZE);

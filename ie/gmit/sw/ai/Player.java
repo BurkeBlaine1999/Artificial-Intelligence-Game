@@ -9,6 +9,7 @@ public class Player {
 	GameWindow gw = GameWindow.getInstance();
 	int timer;
 	
+	//----------------------------------------------------	
 	
 	public static Player getInstance() {
 		if (player == null)
@@ -16,6 +17,8 @@ public class Player {
 		return player;
 	}
 
+	//----------------------------------------------------	
+	
 	public void heal() {
 		if (this.health >= 100) {
 			System.out.println("Player Health : " + health);
@@ -35,28 +38,34 @@ public class Player {
 		}
 	}
 
+	//----------------------------------------------------	
+	
 	public void takeDamage(int sharpness) {
 		if (health <= 0) {
 			System.exit(0);
 		} else {
 			if (sharpness == 2) {
-				System.out.println("PLAYER TAKE 20 DAMAGE");
-				this.health -= 20;
-			} else if (sharpness == 1) {
 				System.out.println("PLAYER TAKE 10 DAMAGE");
 				this.health -= 10;
-			} else if (sharpness == 0){
+			} else if (sharpness == 1) {
 				System.out.println("PLAYER TAKE 5 DAMAGE");
 				this.health -= 5;
+			} else if (sharpness == 0){
+				System.out.println("PLAYER TAKE 2 DAMAGE");
+				this.health -= 2;
 			}
 			System.out.println("(DAMAGED)Health : " + health);
 		}
 	}
-
+	
+	//----------------------------------------------------
+	
 	public int getHealth() {
 		return this.health;
 	}
-
+	
+	//----------------------------------------------------
+	
 	public int[] getPos() {
 		return gw.getPlayerModel();
 	}

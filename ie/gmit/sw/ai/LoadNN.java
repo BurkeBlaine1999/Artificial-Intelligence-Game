@@ -11,6 +11,7 @@ import ie.gmit.sw.ai.nn.Utils;
 
 public class LoadNN {
 	
+	//private static NeuralNetwork NN;
 	private static NeuralNetwork NN;
 	
 	public NeuralNetwork Load() throws ClassNotFoundException, IOException, Exception {
@@ -21,13 +22,6 @@ public class LoadNN {
 				
 				NN = (NeuralNetwork) SerializeObject.load(new File("EnemyNetwork"));
 				
-				double[] test = { 2, 1, 0,};
-				double[] result = NN.process(test);
-				
-				
-				for (int i = 0; i < test.length; i++) {
-		            System.out.print(test[i] + ",");
-		        }			
 				return NN;
 			}
 			
@@ -35,15 +29,6 @@ public class LoadNN {
 	    	  
 				new EnemyNN().go();
 				NN = (NeuralNetwork) SerializeObject.load(new File("EnemyNetwork"));
-				
-				double[] test = { 2, 1, 0};
-				double[] result = NN.process(test);
-				
-				System.out.println(result[0] + " " + result[1] + " " + result[2] + " " + result[3]);
-				
-				for (int i = 0; i < test.length; i++) {
-		            System.out.print(test[i] + ",");
-		        }
 				
 				return NN;
 	      }

@@ -17,7 +17,7 @@ public class EnemyNN {
 		SerializeObject.save(new File("EnemyNetwork"), nn);
 		System.out.println("SAVED DATA");
 			
-		double[] test = {2, 1, 1};
+		double[] test = {2, 0, 0};
 		double[] result = nn.process(test);
 		
 		for (int i = 0; i < result.length; i++){ 

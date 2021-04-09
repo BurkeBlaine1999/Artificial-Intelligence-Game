@@ -1,7 +1,6 @@
 package ie.gmit.sw.ai;
 
 import java.io.IOException;
-
 import javafx.application.Application;
 
 public class Runner {

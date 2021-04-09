@@ -23,10 +23,6 @@ public class GameModel implements Command{
 	private static final int MAX_CHARACTERS = 10;
 	private ThreadLocalRandom rand = ThreadLocalRandom.current();
 	private char[][] model;
-	private Command cmd;
-	private Ghost g;
-	
-	
 	
 	
 	private final ExecutorService exec = Executors.newFixedThreadPool(MAX_CHARACTERS, e -> {
@@ -83,35 +79,35 @@ public class GameModel implements Command{
 		
 						//Tasks, enemy ID,Wall, numEnemies,   ghost
 		//addGameCharacter(tasks, '\u0032', '0', MAX_CHARACTERS / 5,new Ghost(variables)); //2 is a Red Enemy, 0 is a wall
-		addGameCharacter(tasks, '\u0032', '0', MAX_CHARACTERS / 5,new Ghost(100,"Sharp",0)); //2 is a Red Enemy, 0 is a wall
-		addGameCharacter(tasks, '\u0033', '0', MAX_CHARACTERS / 5,new Ghost(100,"Blunt",0)); //3 is a Pink Enemy, 0 is a wall
-		addGameCharacter(tasks, '\u0034', '0', MAX_CHARACTERS / 5,new Ghost(100,"Broken",0)); //4 is a Blue Enemy, 0 is a wall
-		addGameCharacter(tasks, '\u0035', '0', MAX_CHARACTERS / 5,new FuzzyGhost(100,100)); //5 is a Red Green Enemy, 0 is a wall
-		addGameCharacter(tasks, '\u0036', '0', MAX_CHARACTERS / 5,new FuzzyGhost(100,100)); //6 is a Orange Enemy, 0 is a wall
+		addGameCharacter(tasks, '\u0032', '0', MAX_CHARACTERS / 5,new Ghost(100,2,0)); //2 is a Red Enemy, 0 is a wall
+		addGameCharacter(tasks, '\u0033', '0', MAX_CHARACTERS / 5,new Ghost(100,1,0)); //3 is a Pink Enemy, 0 is a wall
+		addGameCharacter(tasks, '\u0034', '0', MAX_CHARACTERS / 5,new Ghost(100,0,0)); //4 is a Blue Enemy, 0 is a wall
+	//	addGameCharacter(tasks, '\u0035', '0', MAX_CHARACTERS / 5,new FuzzyGhost(100,100)); //5 is a Red Green Enemy, 0 is a wall
+	//	addGameCharacter(tasks, '\u0036', '0', MAX_CHARACTERS / 5,new FuzzyGhost(100,100)); //6 is a Orange Enemy, 0 is a wall
 		tasks.forEach(exec::execute);
 		
 	}
 
 
-	private void addGameCharacter(Collection<Task<Void>> tasks, char enemyID, char replace, int numEnemies,FuzzyGhost fuzzyGhost) {
-		int counter = 0;
-
-		while (counter < numEnemies){
-			int row = rand.nextInt(model.length);
-			int col = rand.nextInt(model[0].length);
-
-			if (model[row][col] == replace){
-				
-				model[row][col] = enemyID;
-				
-				tasks.add(new CharacterTask(this, enemyID, row, col, ()-> System.out.println("Action Executed!")));
-				counter++;
-			}
-
-
-		}
-		
-	}
+//	private void addGameCharacter(Collection<Task<Void>> tasks, char enemyID, char replace, int numEnemies,FuzzyGhost fuzzyGhost) {
+//		int counter = 0;
+//
+//		while (counter < numEnemies){
+//			int row = rand.nextInt(model.length);
+//			int col = rand.nextInt(model[0].length);
+//
+//			if (model[row][col] == replace){
+//				
+//				model[row][col] = enemyID;
+//				
+//				tasks.add(new CharacterTask(this, enemyID, row, col, ()-> System.out.println("Action Executed!")));
+//				counter++;
+//			}
+//
+//
+//		}
+//		
+//	}
 
 	private void addGameCharacter(Collection<Task<Void>> tasks, char enemyID, char replace, int numEnemies, Ghost ghost) throws Exception{
 
@@ -125,7 +121,7 @@ public class GameModel implements Command{
 				
 				model[row][col] = enemyID;
 				
-				tasks.add(new CharacterTask(this, enemyID, row, col, ()-> System.out.println("Action Executed!")));
+				tasks.add(new CharacterTask(this, enemyID, row, col, ghost));
 				counter++;
 			}
 

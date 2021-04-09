@@ -29,6 +29,7 @@ public class GameWindow extends Application{
 	static int[] playerPos = {0,0};
 	Text controls = new Text(); 
 	Text healthText = new Text(); 
+	Text ghostHealthText = new Text(); 
 	
 	public String health = "100";
 	
@@ -51,12 +52,16 @@ public class GameWindow extends Application{
 
     	stage.setTitle("GMIT - B.Sc. in Computing (Software Development) - AI Assignment 2021");
 		stage.setWidth(600);
-		stage.setHeight(800);
+		stage.setHeight(830);
 		stage.setOnCloseRequest((e) -> model.tearDown()); //Shut down the executor service
 	
 		
 		controls.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.ITALIC, 20)); 
-		controls.setText("\nUse the arrow keys to move. \nPress 'z' to zoom out !\n");
+		controls.setText("\nUse the arrow keys to move. \n"
+				+ "Press 'z' to zoom out.\n" 
+				+ "If the ghost stops moving its dead.\n"
+				+ "To heal, move away from the ghosts.\n"
+				+ "=====================================");
 		controls.setX(300); 
 		controls.setY(790);	
         
@@ -69,6 +74,8 @@ public class GameWindow extends Application{
 
 		scene.setOnKeyPressed(e -> keyPressed(e)); //Add a key listener
 		stage.setScene(scene);
+		
+		//ADD AN ICON FOR THE GAME
 //		Image icon = new Image("Icon.png");
 //		stage.getIcons().add(icon);
 		
@@ -78,6 +85,7 @@ public class GameWindow extends Application{
     	box.getChildren().add(view);
     	box.getChildren().add(controls);
     	box.getChildren().add(healthText);
+    	box.getChildren().add(ghostHealthText);
 		
     	view.draw(); //Paint the view
     	
@@ -129,6 +137,10 @@ public class GameWindow extends Application{
 	public void updateHealth(){
 		Player p = Player.getInstance();
 		healthText.setText("Player Health : " + p.getHealth());
+	}
+	
+	public void setGhostHealth(int health){
+		healthText.setText("Ghost Health : " + health);
 	}
 	
 	private Sprite[] getSprites() throws Exception{

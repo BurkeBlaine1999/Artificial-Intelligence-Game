@@ -42,6 +42,6 @@ RULEBLOCK No1
  RULE 7 : If Health IS Low AND Sharpness IS Sharp THEN Command IS Run;
  RULE 8 : If Health IS Low AND Sharpness IS blunt THEN Command IS Run;
  RULE 9 : If Health IS Low AND Sharpness IS broken THEN Command IS Run; 
- 
 END_RULEBLOCK
+
 END_FUNCTION_BLOCK
