@@ -12,7 +12,10 @@ public class Runner {
 		Application.launch(GameWindow.class, args);	      
 	}
 	
+	//----------------------------------------------------
+	
 	private void train() throws ClassNotFoundException, IOException, Exception {
 		new LoadNN().Load();
 	}
+	
 }

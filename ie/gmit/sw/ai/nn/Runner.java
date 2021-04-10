@@ -18,7 +18,6 @@ public class Runner {
 			System.out.println(result[i]);
 		}
 		System.out.println(Utils.getMaxIndex(result) + 1);
-
 	}
 	
 	

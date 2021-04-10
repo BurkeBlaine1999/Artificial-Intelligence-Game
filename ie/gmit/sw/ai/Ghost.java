@@ -4,19 +4,19 @@ import java.io.IOException;
 
 public class Ghost implements Command {
 	
+	//VARIABLES -----------------------------------------
 	int NNHealth;
 	int swordSharpness;
 	int player;
-	
 	private int ghostHealth;
 	boolean alive = true;
 	int timer;
-	
 	String Command;	
 	GameWindow gw = new GameWindow();
+	
+	//BODY------------------------------------------------
+	
 	public Ghost() {}
-
-	//----------------------------------------------------
 	
 	public Ghost(int health, int Sharpness,int playerInRange) throws Exception{
 		swordSharpness = Sharpness;
@@ -72,11 +72,11 @@ public class Ghost implements Command {
 		if(this.ghostHealth >= 100) {
 			ghostHealth = 100;		
 		}else {
-			if(timer < 3) {
+			if(timer <= 2) {
 				timer++;
 			}else {
 				timer = 0;
-				ghostHealth += 1;
+				ghostHealth += 2;
 			}
 		}
 
@@ -130,9 +130,6 @@ public class Ghost implements Command {
 	//----------------------------------------------------
 	
 	@Override
-	public void execute() {
-		
-		
-	}
+	public void execute() {}
 
 }

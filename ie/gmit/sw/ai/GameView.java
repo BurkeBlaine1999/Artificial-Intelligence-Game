@@ -11,6 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
+//VARIABLES -----------------------------------------
 /*
  * [WARNING] Don't mess with this class unless you know exactly what you're at... 
  */
@@ -31,7 +32,7 @@ public class GameView extends Canvas{
 	private Sprite[] sprites;
 	private int imageIndex = -1;
 	
-	//Player p = Player.getInstance();
+	//BODY------------------------------------------------
 	
 	public GameView(GameModel model) throws Exception{
 		super(DEFAULT_VIEW_SIZE, DEFAULT_VIEW_SIZE);
@@ -42,6 +43,8 @@ public class GameView extends Canvas{
 		timeline.play();
 	}
 	
+	//----------------------------------------------------
+	
 	public void setCurrentRow(int row) {
 		if (row < cellpadding){
 			currentRow = cellpadding;
@@ -51,6 +54,8 @@ public class GameView extends Canvas{
 			currentRow = row;
 		}
 	}
+	
+	//----------------------------------------------------
 
 	public void setCurrentCol(int col) {
 		if (col < cellpadding){
@@ -61,6 +66,8 @@ public class GameView extends Canvas{
 			currentCol = col;
 		}
 	}
+	
+	//----------------------------------------------------
 
 	public void draw() {
 		GraphicsContext g = super.getGraphicsContext2D();
@@ -100,13 +107,16 @@ public class GameView extends Canvas{
         		}
         	}
         }
-
 	}
+	
+	//----------------------------------------------------
 
 	public void toggleZoom(){
 		zoom = !zoom;		
 	}
 
+	//----------------------------------------------------
+	
 	public void setSprites(Sprite[] sprites){
 		this.sprites = sprites;
 	}

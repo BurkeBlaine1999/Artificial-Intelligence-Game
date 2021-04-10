@@ -1,65 +1,127 @@
 package ie.gmit.sw.ai;
 
-import java.io.File;
+import java.io.IOException;
 
-import org.encog.util.obj.SerializeObject;
-
-import ie.gmit.sw.ai.nn.NeuralNetwork;
-
-public class FuzzyGhost {
-	int enemyHealth;
+public class FuzzyGhost implements Command {
+	
+	//VARIABLES -----------------------------------------
+	int NNHealth;
 	int swordSharpness;
 	int player;
 	private int ghostHealth;
-	String Command;
-	
+	boolean alive = true;
+	int timer;
+	String Command;	
 	GameWindow gw = new GameWindow();
 	
-	public FuzzyGhost(int health, int Sharpness) throws Exception{
-		
-		
+
+	//BODY------------------------------------------------
+	
+	public FuzzyGhost() {}
+	
+	//----------------------------------------------------
+
+	public FuzzyGhost(int health, int Sharpness,int playerInRange) throws Exception{
+		swordSharpness = Sharpness;
+		player = playerInRange;
+		ghostHealth = health;
 		
 		if(health >= 70) {
-			enemyHealth=2;			
+			NNHealth=2;			
 		}else if(health >= 40 && health < 70) {
-			enemyHealth=1;			
+			NNHealth=1;			
 		}else{		
-			enemyHealth=0;
+			NNHealth=0;
 		}
+	}
+
+	//----------------------------------------------------
+
+	public String ghostProcess(int playerInRange) throws ClassNotFoundException, IOException {
 		
-		if(Sharpness > 70) {
-			swordSharpness = 2;
-		}else if(Sharpness < 70 && Sharpness > 40 ) {
-			swordSharpness = 1;
-		}else{
-			swordSharpness = 0;
-		}
-		
-		double[] input = {enemyHealth,swordSharpness};
-		int output = 0;
+		double output =0;
 		
 		try {
-			//output = new LoadNN().runNetwork(input);
-		}catch(Exception e){
+			output = new LoadFCL().Load(ghostHealth, swordSharpness);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		if(output == 1) {
+		System.out.println("playerInRange = " + playerInRange);
+		
+		if(output >= 50 && playerInRange <= 1) {
 			Command = "Attack";
 		}else{
 			Command = "Run";
 		}
-	}
-	
-	public void heal() {
-		ghostHealth += 5;
-		System.out.println("(HEALING)Health : " + ghostHealth);
-	}
-	
-	public void takeDamage() {
-		ghostHealth -= 20;
-		System.out.println("(DAMAGED)Health : " + ghostHealth);
+		return Command; 
 	}
 
+	//----------------------------------------------------
+
+	public void heal() {
+		if(this.ghostHealth >= 100) {
+			ghostHealth = 100;		
+		}else {
+			if(timer <= 2) {
+				timer++;
+			}else {
+				timer = 0;
+				ghostHealth += 2;
+			}
+		}
+
+	}
+	
+	//----------------------------------------------------
+	
+	public void takeDamage() {
+		gw.setGhostHealth(ghostHealth);
+		if(ghostHealth <= 0) {
+			alive = false;
+			System.out.println("FUZZY GHOST DEAD");	
+		}else {
+			ghostHealth -= 15;
+			System.out.println("(DAMAGED) FUZZY GHOST Health : " + ghostHealth);
+		}
+
+	}
+	
+	//----------------------------------------------------
+	
+	public int damageType() {
+		return swordSharpness;
+	}
+	
+	//----------------------------------------------------
+	
+	public void setDamageType(int sharpness) {
+	 swordSharpness = sharpness;
+	}
+	
+	//----------------------------------------------------
+
+	public int[] getGhost() {
+		int[] ghostDetails = {NNHealth,swordSharpness,player};
+		return ghostDetails;
+	}
+	
+	//----------------------------------------------------
+
+	public int getGhostHealth() {
+		return ghostHealth;
+	}
+	
+	//----------------------------------------------------
+	
+	public boolean isAlive() {
+		return alive;
+	}
+	
+	//----------------------------------------------------
+	
+	@Override
+	public void execute() {}
 
 }

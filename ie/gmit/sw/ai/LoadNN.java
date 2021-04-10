@@ -11,8 +11,10 @@ import ie.gmit.sw.ai.nn.Utils;
 
 public class LoadNN {
 	
-	//private static NeuralNetwork NN;
+	//VARIABLES -----------------------------------------
 	private static NeuralNetwork NN;
+	
+	//BODY------------------------------------------------
 	
 	public NeuralNetwork Load() throws ClassNotFoundException, IOException, Exception {
 		
@@ -35,6 +37,8 @@ public class LoadNN {
 		return null;
 		
 	}
+	
+	//----------------------------------------------------
 	
 	public int runNetwork(double[] data) throws Exception{
 		double[] result = NN.process(data);

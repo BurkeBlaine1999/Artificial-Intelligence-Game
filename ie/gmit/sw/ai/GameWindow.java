@@ -15,9 +15,11 @@ import javafx.stage.Stage;
 
 /*
  * Main UI for the game. You should not have to alter anything in this class.
- * 
  */
 public class GameWindow extends Application{
+	
+	//VARIABLES -----------------------------------------
+	
 	private static final char PLAYER_ID = '1';
 	private static final int DEFAULT_SIZE = 60;
 	private static final int IMAGE_COUNT = 6;
@@ -36,6 +38,8 @@ public class GameWindow extends Application{
 	VBox box = new VBox();
 	Scene scene = new Scene(box);
 	
+	//BODY------------------------------------------------
+	
 	private static GameWindow gw;
 	
 	public static GameWindow getInstance() {
@@ -44,18 +48,20 @@ public class GameWindow extends Application{
 		return gw;
 	}
 	
+	//----------------------------------------------------
+	
 	@Override
     public void start(Stage stage) throws Exception {
 		model = new GameModel(DEFAULT_SIZE); //Create a model
     	view = new GameView(model); //Create a view of the model
     	
-
-    	stage.setTitle("GMIT - B.Sc. in Computing (Software Development) - AI Assignment 2021");
+    	//Set The title
+    	stage.setTitle(" G00354397 - Blaine Burke - AI Assignment 2021");
 		stage.setWidth(600);
 		stage.setHeight(830);
 		stage.setOnCloseRequest((e) -> model.tearDown()); //Shut down the executor service
 	
-		
+		//Set The Controls
 		controls.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.ITALIC, 20)); 
 		controls.setText("\nUse the arrow keys to move. \n"
 				+ "Press 'z' to zoom out.\n" 
@@ -65,7 +71,7 @@ public class GameWindow extends Application{
 		controls.setX(300); 
 		controls.setY(790);	
         
-		
+		//Set The Players Health
 		healthText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20)); 
 		healthText.setText("Player Health : " + health);
 		healthText.setX(300); 
@@ -94,6 +100,8 @@ public class GameWindow extends Application{
 		stage.centerOnScreen();
 	}
 	
+	//----------------------------------------------------
+	
     public void keyPressed(KeyEvent e) { //Handle key events
     	KeyCode key = e.getCode(); 
         if (key == KeyCode.RIGHT && currentCol < DEFAULT_SIZE - 1) {
@@ -118,6 +126,8 @@ public class GameWindow extends Application{
         updateView();      
         updateHealth();
     }
+    
+    //----------------------------------------------------
 	
 	private void placePlayer(){  //Place the main player character	
     	currentRow = (int) (DEFAULT_SIZE * Math.random());
@@ -125,6 +135,8 @@ public class GameWindow extends Application{
     	model.set(currentRow, currentCol, PLAYER_ID); //Player is at index 1
     	updateView(); 		
 	}
+	
+	//----------------------------------------------------
 	
 	private void updateView(){ 	
 		view.setCurrentRow(currentRow);
@@ -134,14 +146,7 @@ public class GameWindow extends Application{
 		
 	}
 	
-	public void updateHealth(){
-		Player p = Player.getInstance();
-		healthText.setText("Player Health : " + p.getHealth());
-	}
-	
-	public void setGhostHealth(int health){
-		healthText.setText("Ghost Health : " + health);
-	}
+	//----------------------------------------------------
 	
 	private Sprite[] getSprites() throws Exception{
 		/*
@@ -158,8 +163,25 @@ public class GameWindow extends Application{
 		sprites[5] = new Sprite("Orange Enemy", "/res/orange-0.png", "/res/orange-1.png", "/res/orange-2.png", "/res/orange-3.png", "/res/orange-4.png", "/res/orange-5.png", "/res/orange-6.png", "/res/orange-7.png");		return sprites;
 	}
 	
+	//----------------------------------------------------
+	
 	public int[] getPlayerModel() {
 		return playerPos;
 	}
+	
+	//----------------------------------------------------
+	
+	public void updateHealth(){
+		Player p = Player.getInstance();
+		healthText.setText("Player Health : " + p.getHealth());
+	}
+	
+	//----------------------------------------------------
+	
+	public void setGhostHealth(int health){
+		healthText.setText("Ghost Health : " + health);
+	}
+	
+	//----------------------------------------------------
 	
 }

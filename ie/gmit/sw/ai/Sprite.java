@@ -2,6 +2,7 @@ package ie.gmit.sw.ai;
 
 import javafx.scene.image.Image;
 
+	//VARIABLES -----------------------------------------
 
 /*
  * Sprite container for the game. You should not have to alter anything in this class.
@@ -10,6 +11,8 @@ public class Sprite {
 	private String name; //The name of this sprite
 	private Image[] frames; //The set of image frames to animate
  	private int index = 0; //Initial starting index in array
+ 	
+ 	//BODY------------------------------------------------
  	
 	public Sprite(String name, String... images) throws Exception{
 		this.name = name;
@@ -21,6 +24,8 @@ public class Sprite {
 		}
 	}
 	
+	//----------------------------------------------------	
+	
 	public Image getNext(){ //Returns the next image frame
 		int idx = index;
 		if (index < frames.length - 1){
@@ -30,6 +35,8 @@ public class Sprite {
 		}
 		return frames[idx]; 
 	}
+	
+	//----------------------------------------------------	
 	
 	public String getName(){
 		return this.name;

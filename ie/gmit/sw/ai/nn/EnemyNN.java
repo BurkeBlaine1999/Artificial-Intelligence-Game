@@ -6,7 +6,11 @@ import ie.gmit.sw.ai.nn.activator.Activator;
 
 public class EnemyNN {
 	
+	//BODY------------------------------------------------
+	
 	public static void main(String[] args) throws Exception {new EnemyNN().go();}
+	
+	//----------------------------------------------------	
 	
 	public void go() throws Exception {
 		
@@ -26,12 +30,16 @@ public class EnemyNN {
 		System.out.println(Utils.getMaxIndex(result) + 1);//Pass input and returns action		
 	}
 	
+	//----------------------------------------------------	
+	
 	private double[][] data = { //Health, Sword, Player
 		{2,0,0},{2,0,1},{2,1,0},{2,1,1},{0,0,0},
 		{1,0,0},{1,0,1},{1,1,0},{1,1,1},		
 		{2,2,0},{2,2,1},{2,2,0},{2,2,1},{0,2,0},
 		{1,2,0},{1,2,1},{1,2,0},{1,2,1}
 		};
+	
+	//----------------------------------------------------	
 
 	private double[][] expected = { //Attack,Run
 		{0.0,1.0},{0.0,1.0},{0.0,1.0},{1,0,0.0},{0.0,1.0},
@@ -39,6 +47,5 @@ public class EnemyNN {
 		{0.0,1.0},{1.0,0.0},{0.0,1.0},{1,0,0.0},{0.0,1.0},
 		{0.0,1.0},{1.0,0.0},{0.0,1.0},{1.0,0.0}
 		};
-	
 	
 }

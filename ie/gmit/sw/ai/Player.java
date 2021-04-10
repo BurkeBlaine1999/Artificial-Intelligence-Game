@@ -1,15 +1,14 @@
 package ie.gmit.sw.ai;
 
-import javafx.application.Application;
-
 public class Player {
 
+	//VARIABLES -----------------------------------------
 	private static Player player;
 	private int health = 100;
 	GameWindow gw = GameWindow.getInstance();
 	int timer;
 	
-	//----------------------------------------------------	
+	//BODY------------------------------------------------
 	
 	public static Player getInstance() {
 		if (player == null)
@@ -23,11 +22,11 @@ public class Player {
 		if (this.health >= 100) {
 			System.out.println("Player Health : " + health);
 		} else {
-			if(timer < 3) {
+			if(timer <= 2) {
 				timer++;
 			}else {
 				timer = 0;
-				this.health += 1;
+				this.health += 2;
 				System.out.println("(HEALING) Player Health : " + health);
 			}
 
