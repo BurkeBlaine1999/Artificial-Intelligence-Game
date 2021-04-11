@@ -5,7 +5,6 @@ import java.io.IOException;
 public class FuzzyGhost implements Command {
 	
 	//VARIABLES -----------------------------------------
-	int NNHealth;
 	int swordSharpness;
 	int player;
 	private int ghostHealth;
@@ -25,14 +24,6 @@ public class FuzzyGhost implements Command {
 		swordSharpness = Sharpness;
 		player = playerInRange;
 		ghostHealth = health;
-		
-		if(health >= 70) {
-			NNHealth=2;			
-		}else if(health >= 40 && health < 70) {
-			NNHealth=1;			
-		}else{		
-			NNHealth=0;
-		}
 	}
 
 	//----------------------------------------------------
@@ -103,7 +94,7 @@ public class FuzzyGhost implements Command {
 	//----------------------------------------------------
 
 	public int[] getGhost() {
-		int[] ghostDetails = {NNHealth,swordSharpness,player};
+		int[] ghostDetails = {ghostHealth,swordSharpness,player};
 		return ghostDetails;
 	}
 	

@@ -36,23 +36,21 @@ public class Ghost implements Command {
 	
 	public String ghostProcess(int playerInRange) throws ClassNotFoundException, IOException {
 		
-		
 		if(ghostHealth >= 70) {
-			NNHealth=2;			
+			NNHealth=2;
 		}else if(ghostHealth >= 40 && ghostHealth < 70) {
-			NNHealth=1;			
-		}else{		
+			NNHealth=1;
+		}else{
 			NNHealth=0;
 		}
 		
-		System.out.println(NNHealth + "  " + swordSharpness + "  " + playerInRange);
+		System.out.println("\n===========\nGHOST STATS \nHEALTH : " + NNHealth + "\nSHARPNESS : " + swordSharpness + "\nPlayer in range :  " + playerInRange + "\n===========");
 		
 		double[] input = {NNHealth,swordSharpness,playerInRange};
 		int output = 0;
 		
 		try {
 			output = new LoadNN().runNetwork(input);
-			System.out.println(output);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -67,7 +65,7 @@ public class Ghost implements Command {
 	}
 
 	//----------------------------------------------------
-	
+
 	public void heal() {
 		if(this.ghostHealth >= 100) {
 			ghostHealth = 100;		
@@ -81,19 +79,16 @@ public class Ghost implements Command {
 		}
 
 	}
-	
+
 	//----------------------------------------------------
-	
+
 	public void takeDamage() {
 		gw.setGhostHealth(ghostHealth);
 		if(ghostHealth <= 0) {
 			alive = false;
-			System.out.println("GHOST DEAD");	
 		}else {
 			ghostHealth -= 15;
-			System.out.println("(DAMAGED) GHOST Health : " + ghostHealth);
 		}
-
 	}
 	
 	//----------------------------------------------------

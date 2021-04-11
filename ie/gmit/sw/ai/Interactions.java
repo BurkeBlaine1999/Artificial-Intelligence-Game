@@ -48,8 +48,6 @@ public class Interactions {
 		distance = Math.sqrt((playerRow - row) * (playerRow -row) + (playerCol - col) * (playerCol - col));
 		distance = Math.round(distance);
 		
-		System.out.println("=======================" + distance);
-		
 		if(distance <= 3) {
 			if(fGhost.isAlive()) {
 				attack();

@@ -17,7 +17,7 @@ public class LoadFCL {
 	fis.setVariable("Sharpness", sharpnessValue);
 	fis.evaluate(); //Execute the fuzzy inference engine
 	
-	System.out.println(fis.getVariable("Command").getValue()); //Output end result 
+	//System.out.println(fis.getVariable("Command").getValue()); //Output end result 
 	
 	return fis.getVariable("Command").getValue();
 

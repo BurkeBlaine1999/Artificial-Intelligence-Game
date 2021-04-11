@@ -51,11 +51,9 @@ public class CharacterTask extends Task<Void>{
     	
     	while (alive) {
     		
-    		//System.out.println(alive);
-    		
         	if(interaction.ghostAlive() == false){
         		alive = false;
-        		System.out.println("INTERACTIONS GHOST ALIVE = " + alive);
+        		System.out.println("\n===========\nGHOST " + this.enemyID + " IS DEAD\n===========");
         	}
         	
         	if(ghost == null) {
@@ -67,7 +65,7 @@ public class CharacterTask extends Task<Void>{
             	System.out.println("FuzzyGhost distance = " + distance);
             	action = fGhost.ghostProcess(distance);
             	
-            	System.out.println("GHOST COMMAND : " + action);
+            	System.out.println("\n===========\nGHOST " + this.enemyID + "\nCOMMAND : " + action + "\n===========");
             	
             	synchronized (model) {
             		int temp_row = row, temp_col = col;
@@ -96,8 +94,8 @@ public class CharacterTask extends Task<Void>{
             	System.out.println("Ghost distance = " + distance);
             	action = ghost.ghostProcess(distance);
             	
-            	System.out.println("GHOST COMMAND : " + action);
-            	
+            	System.out.println("\n===========\nGHOST " + this.enemyID + "\nCOMMAND : " + action + "\n===========");
+            	           	
             	synchronized (model) {
             		int temp_row = row, temp_col = col;
             		if (rand.nextBoolean()) {
