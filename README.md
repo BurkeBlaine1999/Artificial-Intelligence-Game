@@ -1,5 +1,13 @@
 # Autonomous Computer-controlled Game Characters
 
+## Running the code
+```
+Enter the root directory of the project in command prompt
+```
+```
+Enter "java --module-path .;C:/Users/blain/Desktop/AiProj/bin/lib/javafx-sdk-11.0.2/lib/;C:/Users/blain/Desktop/AiProj/bin/lib/encog-core.jar;C:/Users/blain/Desktop/AiProj/bin/lib/jFuzzyLogic.jar --module gmit.software/ie.gmit.sw.ai.Runner"
+```
+
 ## Game Design
 In my application, I create the ghosts in GameModel through the 
 addGameCharacters () method. This creates instances of all the ghosts and sets 
