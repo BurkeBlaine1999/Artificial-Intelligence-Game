@@ -5,7 +5,7 @@
 Enter the root directory of the project in command prompt
 ```
 ```
-Enter "java --module-path .;C:/Users/blain/Desktop/AiProj/bin/lib/javafx-sdk-11.0.2/lib/;C:/Users/blain/Desktop/AiProj/bin/lib/encog-core.jar;C:/Users/blain/Desktop/AiProj/bin/lib/jFuzzyLogic.jar --module gmit.software/ie.gmit.sw.ai.Runner"
+> Enter "java --module-path .;./bin/lib/javafx-sdk-11.0.2/lib/;./bin/lib/encog-core.jar;./bin/lib/jFuzzyLogic.jar --module gmit.software/ie.gmit.sw.ai.Runner"
 ```
 
 ## Game Design
